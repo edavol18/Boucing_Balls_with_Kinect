@@ -13,7 +13,7 @@ KinectTracker tracker;
 Kinect kinect;
 
 
-//Variables for center of ellipse, speed of ellipse, and size of circle. 
+//Variables for center of ellipse, final and initial velocities of ellipse, size of circle, kinect variable. Using array to list all ellipses. 
 int size1; 
 int n = 50;
 int [] x = new int[n];
@@ -29,10 +29,12 @@ int pmy;
 PVector v2;
 
 void setup() {
+//Sets screen size to fit dimensions of video wall. 
   size(1920, 1080);
   kinect = new Kinect(this);
   tracker = new KinectTracker();
- 
+  
+  //Initializes code of list.
   for (int i = 0; i < x.length; i++) {
   
   //This sets the x and y positions of the ellipses to a random starting location.
@@ -101,6 +103,7 @@ void draw() {
     ellipse(mx, my, size1, size1);
     stroke(100);
     ellipse(x[i],y[i],size1,size1);
+    //Creates variable for distance between center of ellipses in list and kinect controlled ellipse.
     d = dist(mx,my,x[i],y[i]);
     
     if (d <= radius + radius) {
